@@ -7,12 +7,13 @@
 
       const send_mssg = document.createElement('div');
       send_mssg.style.height = "100%";
-      send_mssg.style.width = "90vh";
+      send_mssg.style.maxWidth = "70vh";
+      send_mssg.style.width = "70vw";
       send_mssg.style.display = "flex"
       send_mssg.style.justifyContent = "center"
       const t = document.createElement('textarea');
       t.setAttribute('id','textInput');
-      t.style.width = "70vh";
+      t.style.width = "70%";
       t.style.border = "none";
       t.style.outline = "none";
       t.style.borderBottom = "1px solid #000000"
@@ -23,7 +24,7 @@
       b.style.backgroundColor= "#ffffff";
       b.style.backgroundSize = "contain";
       b.style.position = "center";
-      b.style.marginTop = "1vh"
+      b.style.marginTop = "1%"
       b.style.height = "5vh";
       b.style.width = "5vh";
       b.style.border = "none";
@@ -52,13 +53,13 @@
       grid.style.flexDirection = "column";
       grid.style.rowGap = "5vh";
       grid.style.height = "85vh";
-      grid.style.width = "90vh";
+      grid.style.maxWidth = "70vh";
+      grid.style.width = "70vw";
       grid.style.padding = "2vh";
-      grid.style.alignItems = "left";
+      grid.style.alignItems = "center";
       grid.style.overflowY = "scroll";
       grid.style.overflowX = "hidden";
       grid.style.backgroundImage = "url(img/bg_image.jpg)";
-      grid.style.backgroundRepeat = "repeat-y";
       all.appendChild(grid);
       all.appendChild(send_mssg);
 
@@ -76,11 +77,11 @@
 
           let div = document.createElement("div");
           div.classList.add("messages");
-          div.style.font = "normal 2.5vh Helvetica"
+          div.style.font = "normal 2.5dvh Helvetica"
           div.style.padding = "2vh";
           div.style.height = "auto";
-          div.style.inlineSize = "70vh";
-          div.style.width = "70vh";
+          div.style.inlineSize = "70%";
+          div.style.maxWidth = "70%";
           div.style.overflowWrap = "break-word";
   
           if (messages[i].username == 'Marchena'){
@@ -90,7 +91,8 @@
             div.style.borderBottom = "0.5vh solid #9e8649";
             div.style.borderRight = "0.5vh solid #9e8649";
             div.style.borderRadius = "1vh 1vh 0vh 1vh"
-            div.style.marginLeft = "10vh";
+            div.style.marginLeft = "auto";
+            div.style.marginRight = "0";
           } else{
             div.style.backgroundColor = "#2a9d8f";
             div.style.borderTop= "0.5vh solid #44c9b9";
@@ -98,7 +100,8 @@
             div.style.borderBottom = "0.5vh solid #1a6b61";
             div.style.borderRight = "0.5vh solid #1a6b61";
             div.style.borderRadius = "1vh 1vh 1vh 0vh"
-            div.style.marginLeft = "2vh";
+            div.style.marginRight = "auto";
+            div.style.marginLeft = "0";
           }
   
           try{
@@ -108,8 +111,8 @@
   
             var img = new Image();
             img.src = `${messages[i].message}`;
-            img.style.maxHeight="70vh";
-            img.style.maxWidth="70vh";
+            img.style.maxHeight="70%";
+            img.style.maxWidth="70%";
             img.onload = function() {
               ctx.drawImage(img, 0, 0, 100, 100);
              };
@@ -130,8 +133,8 @@
           div.style.font = "normal 2.5vh Helvetica"
           div.style.padding = "2vh";
           div.style.height = "auto";
-          div.style.inlineSize = "70vh";
-          div.style.width = "70vh";
+          div.style.inlineSize = "70%";
+          div.style.maxWidth = "70%";
           div.style.overflowWrap = "break-word";
   
           if (messages[i].username == 'Marchena'){
@@ -141,7 +144,8 @@
             div.style.borderBottom = "0.5vh solid #9e8649";
             div.style.borderRight = "0.5vh solid #9e8649";
             div.style.borderRadius = "1vh 1vh 0vh 1vh"
-            div.style.marginLeft = "10vh";
+            div.style.marginLeft = "auto";
+            div.style.marginRight = "0";
           } else{
             div.style.backgroundColor = "#2a9d8f";
             div.style.borderTop= "0.5vh solid #44c9b9";
@@ -149,7 +153,8 @@
             div.style.borderBottom = "0.5vh solid #1a6b61";
             div.style.borderRight = "0.5vh solid #1a6b61";
             div.style.borderRadius = "1vh 1vh 1vh 0vh"
-            div.style.marginLeft = "2vh";
+            div.style.marginLeft = "0";
+            div.style.marginRight = "auto";
           }
   
           try{
