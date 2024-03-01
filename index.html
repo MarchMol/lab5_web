@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <script type="application/javascript">
+    
+      const send_mssg = document.createElement('div');
+      send_mssg.style.height = "100%";
+      send_mssg.style.width = "90dvh";
+      send_mssg.style.display = "flex"
+      send_mssg.style.justifyContent = "center"
+      const t = document.createElement('textarea');
+      t.setAttribute('id','textInput');
+      t.style.width = "70dvh";
+      t.style.border = "none";
+      t.style.outline = "none";
+      t.style.borderBottom = "1px solid #000000"
+      document.body.append(t);
+      const b = document.createElement('button');
+  
+      b.style.backgroundImage= "url(/img/send-icon.webp)";
+      b.style.backgroundColor= "#ffffff";
+      b.style.backgroundSize = "contain";
+      b.style.position = "center";
+      b.style.marginTop = "1dvh"
+      b.style.height = "5dvh";
+      b.style.width = "5dvh";
+      b.style.border = "none";
+      b.style.outline = "none";
+      b.style.transition = "background-color 0.3s";
+
+      send_mssg.appendChild(t);
+      send_mssg.appendChild(b);
+      send_mssg.style.border = "2px solid #000000";
+      send_mssg.style.borderRadius = "1dvh";
+
+      const all = document.createElement("div");
+      all.style.padding = "0";
+      all.style.height = "100%";
+      all.style.width = "100%";
+      all.style.display = "flex"
+      all.style.justifyContent = "center"
+      all.style.alignItems = "center"
+      all.style.flexDirection = "column"
+     
+      document.body.appendChild(all)
+  
+      const grid = document.createElement("div");
+      grid.style.position = "relative";
+      grid.style.display = "flex";
+      grid.style.flexDirection = "column";
+      grid.style.rowGap = "5dvh";
+      grid.style.height = "85dvh";
+      grid.style.width = "90dvh";
+      grid.style.padding = "2dvh";
+      grid.style.alignItems = "left";
+      grid.style.overflowY = "scroll";
+      grid.style.overflowX = "hidden";
+      grid.style.backgroundImage = "url(img/bg_image.jpg)";
+      grid.style.backgroundRepeat = "repeat-y";
+      all.appendChild(grid);
+      all.appendChild(send_mssg);
+
+    const getMessages = async () => {
+
+      const response = await fetch('https://chat.tiburoncin.lat/messages');
+      const messages = await response.json();
+
+      console.log(grid.childElementCount)
+      console.log(messages.length)
+      var cant = grid.childElementCount
+      
+      if(grid.childElementCount==0){
+        for(let i = messages.length-1; i>=cant; i--){
+
+          let div = document.createElement("div");
+          div.classList.add("messages");
+          div.style.font = "normal 2.5vh Helvetica"
+          div.style.padding = "2dvh";
+          div.style.height = "auto";
+          div.style.inlineSize = "70dvh";
+          div.style.width = "70dvh";
+          div.style.overflowWrap = "break-word";
+  
+          if (messages[i].username == 'Marchena'){
+            div.style.backgroundColor = "#e9c46a";
+            div.style.borderTop= "0.5vh solid #f0d081";
+            div.style.borderLeft = "0.5vh solid #f0d081";
+            div.style.borderBottom = "0.5vh solid #9e8649";
+            div.style.borderRight = "0.5vh solid #9e8649";
+            div.style.borderRadius = "1vh 1vh 0vh 1vh"
+            div.style.marginLeft = "10dvh";
+          } else{
+            div.style.backgroundColor = "#2a9d8f";
+            div.style.borderTop= "0.5vh solid #44c9b9";
+            div.style.borderLeft = "0.5vh solid #44c9b9";
+            div.style.borderBottom = "0.5vh solid #1a6b61";
+            div.style.borderRight = "0.5vh solid #1a6b61";
+            div.style.borderRadius = "1vh 1vh 1vh 0vh"
+            div.style.marginLeft = "2dvh";
+          }
+  
+          try{
+            const tryURL = new URL(messages[i].message);
+            div.innerHTML = `<b>${messages[i].username}:</b> <br>`
+            div.display = "flex";
+  
+            var img = new Image();
+            img.src = `${messages[i].message}`;
+            img.style.maxHeight="70dvh";
+            img.style.maxWidth="70dvh";
+            img.onload = function() {
+              ctx.drawImage(img, 0, 0, 100, 100);
+             };
+            div.appendChild(img);
+          } catch{
+            div.innerHTML = `<b>${messages[i].username}:</b> <br> ${messages[i].message}`;
+          }
+          console.log(i)
+          console.log(messages[i].username)
+          console.log(messages[i].message)
+          grid.appendChild(div);
+        }
+      } else{
+        for(let i = messages.length-cant-1; i>=0; i--){
+
+          let div = document.createElement("div");
+          div.classList.add("messages");
+          div.style.font = "normal 2.5vh Helvetica"
+          div.style.padding = "2dvh";
+          div.style.height = "auto";
+          div.style.inlineSize = "70dvh";
+          div.style.width = "70dvh";
+          div.style.overflowWrap = "break-word";
+  
+          if (messages[i].username == 'Marchena'){
+            div.style.backgroundColor = "#e9c46a";
+            div.style.borderTop= "0.5vh solid #f0d081";
+            div.style.borderLeft = "0.5vh solid #f0d081";
+            div.style.borderBottom = "0.5vh solid #9e8649";
+            div.style.borderRight = "0.5vh solid #9e8649";
+            div.style.borderRadius = "1vh 1vh 0vh 1vh"
+            div.style.marginLeft = "10dvh";
+          } else{
+            div.style.backgroundColor = "#2a9d8f";
+            div.style.borderTop= "0.5vh solid #44c9b9";
+            div.style.borderLeft = "0.5vh solid #44c9b9";
+            div.style.borderBottom = "0.5vh solid #1a6b61";
+            div.style.borderRight = "0.5vh solid #1a6b61";
+            div.style.borderRadius = "1vh 1vh 1vh 0vh"
+            div.style.marginLeft = "2dvh";
+          }
+  
+          try{
+            const tryURL = new URL(messages[i].message);
+            div.innerHTML = `<b>${messages[i].username}:</b> <br>`
+            div.display = "flex";
+  
+            var img = new Image();
+            img.src = `${messages[i].message}`;
+            img.style.maxHeight="70dvh";
+            img.style.maxWidth="70dvh";
+            img.onload = function() {
+              ctx.drawImage(img, 0, 0, 100, 100);
+             };
+            div.appendChild(img);
+          } catch{
+            div.innerHTML = `<b>${messages[i].username}:</b> <br> ${messages[i].message}`;
+          }
+          console.log(i)
+          console.log(messages[i].username)
+          console.log(messages[i].message)
+          grid.appendChild(div);
+        }
+      }
+    }
+
+    const postMessage = async () => {
+      console.log(t.value)
+      console.log(t.value.length)
+      if(t.value.length<=140){
+        const body = {
+          username: 'Marchena',
+          message: t.value,
+        }
+        const response = await fetch('https://chat.tiburoncin.lat/messages',
+        {
+          method: 'POST',
+          body: JSON.stringify(body)
+        })
+
+        document.getElementById('textInput').value = '';
+        getMessages()
+      } else{
+        alert('Limite de Caracteres Sobrepasado');
+      }
+    }
+
+    b.addEventListener('click', postMessage);
+    b.addEventListener('mouseover', () => {
+      b.style.backgroundColor = '#FFF000';
+    });
+    b.addEventListener('mouseout', () => {
+      b.style.backgroundColor = '#ffffff';
+    });
+
+    t.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        console.log('Enter key pressed!');
+        postMessage();
+      }
+    });
+    getMessages()
+    setInterval(getMessages, 10000);
+    </script>
+  </body>
+</html>
